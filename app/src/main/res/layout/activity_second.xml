@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/mainActivityTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
-        android:text="Hello world"
-        android:textSize="22dp" />
+    android:gravity="center"
+    tools:context=".SecondActivity">
 
     <Button
-        android:id="@+id/mainActivityButton"
+        android:id="@+id/secondActivityButtonA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
+        android:layout_gravity="center_horizontal"
         android:layout_margin="50dp"
-        android:text="Open Activity B" />
+        android:text="Open Activity A" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/secondActivityButtonC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="50dp"
+        android:text="Finish Task" />
+
+</LinearLayout>
