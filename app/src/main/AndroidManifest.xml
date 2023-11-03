@@ -18,6 +18,7 @@
 
         <activity
             android:exported="false"
+            android:launchMode="singleTask"
             android:taskAffinity=".newTask"
             android:name=".SecondActivity" />
 
