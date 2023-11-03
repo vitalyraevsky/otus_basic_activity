@@ -13,6 +13,8 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i(TAG, "\n")
+        Log.d(TAG, "Task Id: ${taskId}")
 
         val id = (applicationContext as App).id
         Log.d(TAG, "id = $id")
