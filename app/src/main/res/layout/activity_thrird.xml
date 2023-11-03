@@ -7,18 +7,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".SecondActivity">
+    tools:context=".ThirdActivity">
 
     <Button
-        android:id="@+id/secondActivityButtonA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="50dp"
-        android:text="Open Activity C" />
-
-    <Button
-        android:id="@+id/secondActivityButtonC"
+        android:id="@+id/thirdActivityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
