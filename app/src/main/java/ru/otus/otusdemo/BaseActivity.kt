@@ -76,7 +76,7 @@ open class BaseActivity(
     private fun printTaskInfo() {
         Log.i(TAG, "\n")
         val tasks = activityManager.appTasks
-        Log.i(TAG, "\tTasks count: ${tasks.size}")
+        Log.i(TAG, "Tasks count: ${tasks.size}")
         for (task in tasks) {
             Log.i(TAG, "Task info:")
             //Log.i(TAG, "\tCount: ${task.taskInfo.taskId}")

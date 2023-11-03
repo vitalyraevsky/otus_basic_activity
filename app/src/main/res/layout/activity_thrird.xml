@@ -17,4 +17,12 @@
         android:layout_margin="50dp"
         android:text="Finish Task" />
 
+    <Button
+        android:id="@+id/thirdActivityButtonC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="50dp"
+        android:text="Clear Task" />
+
 </LinearLayout>
