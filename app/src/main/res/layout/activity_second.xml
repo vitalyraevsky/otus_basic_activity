@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".SecondActivity">
 
-    <Button
-        android:id="@+id/secondActivityButtonA"
+    <TextView
+        android:id="@+id/secondActivityTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="50dp"
-        android:text="Open Activity C" />
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:text="Hello Second"
+        android:textSize="22dp" />
 
-    <Button
-        android:id="@+id/secondActivityButtonC"
+    <TextView
+        android:id="@+id/secondActivityTextView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="50dp"
-        android:text="Finish Task" />
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:text=""
+        android:textSize="22dp" />
+
 
 </LinearLayout>

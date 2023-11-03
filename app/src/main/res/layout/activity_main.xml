@@ -21,7 +21,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_margin="50dp"
-        android:text="Open Activity B" />
+        android:layout_margin="30dp"
+        android:text="Open" />
+
+    <Button
+        android:id="@+id/mainActivityButtonS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="100dp"
+        android:text="Open Second" />
+
 
 </FrameLayout>
