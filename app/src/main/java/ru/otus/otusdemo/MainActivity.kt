@@ -26,6 +26,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         button.setOnClickListener {
             Log.d(TAG, "button clicked")
             val intent = Intent(this, SecondActivity::class.java).apply {
+                // Открыть активити в новом таске можно  через флаг Intent FLAG_ACTIVITY_NEW_TASK или через launchMode="singleTask"
                 //flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             }
             startActivity(intent)

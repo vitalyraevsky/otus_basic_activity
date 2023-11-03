@@ -16,6 +16,7 @@
         android:theme="@style/Theme.OtusDemo"
         tools:targetApi="31">
 
+        <!-- Открыть активити в новом таске можно  через флаг Intent FLAG_ACTIVITY_NEW_TASK или через launchMode="singleTask" -->
         <activity
             android:exported="false"
             android:launchMode="singleTask"
