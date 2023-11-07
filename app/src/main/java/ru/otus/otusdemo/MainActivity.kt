@@ -6,96 +6,71 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import java.io.Serializable
 
 private const val TAG = "MainActivity"
+private const val CODE = 100
 
 class MainActivity : BaseActivity(R.layout.activity_main) {
 
+    // Новый способ получать данные из результата
+    private val resultContract = registerForActivityResult(ContractSecondActivity()) { result ->
+        textResult.text = result
+        //method(result)
+    }
+
+    private fun method(result: String?): String? {
+        TODO("Not yet implemented")
+    }
+
     lateinit var button: Button
     lateinit var buttonS: Button
+    lateinit var textResult: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         button = findViewById(R.id.mainActivityButton)
         buttonS = findViewById(R.id.mainActivityButtonS)
+        textResult = findViewById(R.id.mainActivityTextView)
     }
 
     override fun onStart() {
         super.onStart()
 
+        // Новый способ отправлять данные для результата
         buttonS.setOnClickListener {
-/*
-            val intent = Intent(
-                Intent.ACTION_DIAL,
-                Uri.parse("tel:8906777")
-            )
-            startActivity(intent)
-*/
-            val intent = Intent(this, SecondActivity::class.java).apply {
-                putExtra("KEY", "string")
-                putExtra("KEY2", "st")
-/*
-                putExtra("data",
-                    PageData("title","body") as Parcelable
-                )
-*/
-                // ТАК НЕ НАДО
-                putExtra("data",
-                    PageData("title","body") as Parcelable
-                )
-                putExtra("dataSerializable",
-                    PageData("title","body") as Serializable
-                )
-
-                val bundleCat = Bundle().apply {
-                    putInt("id", 1)
-                    putString("name", "Category 1")
-                }
-                val bundle = Bundle().apply {
-                    putString("name", "John")
-                    putInt("age", 33)
-                    putBundle("category", bundleCat)
-                }
-                putExtra("Person", bundle)
-            }
-            startActivity(intent)
+            resultContract.launch("test")
         }
 
+        // Старый способ отправки данных для результата
         button.setOnClickListener {
             Log.d(TAG, "button clicked")
-
-            // WEB
-/*
-            val intent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("https://otus.ru")
-            )
-*/
-            // Dial
-/*
-            val intent = Intent(
-                Intent.ACTION_DIAL,
-                Uri.parse("tel:8906777")
-            )
-*/
-            // Mail
-            val intent = Intent(
-                Intent.ACTION_SENDTO,
-                Uri.parse("mailto:android@otus.ru")
-            )
-
-            // MAP
-/*
-            val intent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("geo:0,0?q=bar")
-            ).setPackage("com.google.android.apps.maps")
-*/
-            // Activity
-            //val intent = Intent("OpenSecondActivity")
-
-            startActivity(intent)
+            val intent = Intent(this, SecondActivity::class.java).apply {
+                putExtra(NAME_KEY, "test")
+            }
+            startActivityForResult(intent, CODE)
         }
+    }
+
+    // Старый способ получения результатов
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.d(TAG, "onActivityResult")
+        when(requestCode) {
+            CODE -> {
+                if (resultCode == RESULT_OK && data != null) {
+                    textResult.text =  data.extras?.getString(RESULT_KEY)
+                } else if (resultCode == RESULT_CANCELED){
+                    Toast.makeText(this, "Отмена действий" ,Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    companion object {
+        val NAME_KEY = "name"
+        val RESULT_KEY = "result"
     }
 }

@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_margin="30dp"
-        android:text="Open" />
+        android:text="Open Old" />
 
     <Button
         android:id="@+id/mainActivityButtonS"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_margin="100dp"
-        android:text="Open Second" />
+        android:text="Open New" />
 
 
 </FrameLayout>
