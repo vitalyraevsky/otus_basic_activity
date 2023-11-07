@@ -1,19 +1,58 @@
 package ru.otus.otusdemo
 
+import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
+import android.provider.Settings
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import java.io.Serializable
 
 private const val TAG = "MainActivity"
 private const val CODE = 100
 
 class MainActivity : BaseActivity(R.layout.activity_main) {
+
+    private val takePictureContract = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
+        imageView.setImageBitmap(bitmap)
+    }
+
+    private val permissionsContract = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+        val isCameraGranted = permissions[Manifest.permission.CAMERA]
+        val isLocationGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION]
+
+    }
+
+    private val permissionCamera = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        when {
+            granted -> {
+                // Пермишен получен
+                takePictureContract.launch(null)
+            }
+            !shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) -> {
+                // пользователь нажам на "не спрашивать больше"
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                    val uri =Uri.fromParts("package", packageName, null)
+                    data = uri
+                }
+                startActivity(intent)
+            }
+            else -> {
+                // Пермишен не получен, без "не спрашивать больше"
+                Toast.makeText(this, "Ну сорянб не хочешь - не надо", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private val getContentContract = registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
+        imageView.setImageURI(result)
+    }
 
     // Новый способ получать данные из результата
     private val resultContract = registerForActivityResult(ContractSecondActivity()) { result ->
@@ -27,17 +66,29 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     lateinit var button: Button
     lateinit var buttonS: Button
+    lateinit var buttonC: Button
+    lateinit var imageView: ImageView
     lateinit var textResult: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         button = findViewById(R.id.mainActivityButton)
         buttonS = findViewById(R.id.mainActivityButtonS)
+        buttonC = findViewById(R.id.mainActivityButtonC)
+        imageView = findViewById(R.id.mainActivityImage)
         textResult = findViewById(R.id.mainActivityTextView)
     }
 
     override fun onStart() {
         super.onStart()
+
+        buttonC.setOnClickListener {
+            //getContentContract.launch("image/*")
+            //takePictureContract.launch(null)
+            permissionCamera.launch(Manifest.permission.CAMERA)
+
+            //permissionsContract.launch( listOf( Manifest.permission.CAMERA , Manifest.permission.ACCESS_FINE_LOCATION).toTypedArray())
+        }
 
         // Новый способ отправлять данные для результата
         buttonS.setOnClickListener {
