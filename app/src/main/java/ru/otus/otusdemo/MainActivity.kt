@@ -2,6 +2,7 @@ package ru.otus.otusdemo
 
 import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
@@ -12,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import java.io.Serializable
 
 private const val TAG = "MainActivity"
@@ -83,9 +85,16 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         super.onStart()
 
         buttonC.setOnClickListener {
+
             //getContentContract.launch("image/*")
+
             //takePictureContract.launch(null)
-            permissionCamera.launch(Manifest.permission.CAMERA)
+
+            // не обязательно  checkSelfPermission
+            val isGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+            if(!isGranted) {
+                permissionCamera.launch(Manifest.permission.CAMERA)
+            }
 
             //permissionsContract.launch( listOf( Manifest.permission.CAMERA , Manifest.permission.ACCESS_FINE_LOCATION).toTypedArray())
         }
